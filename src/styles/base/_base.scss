@@ -1,0 +1,22 @@
+// base.scss
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-family: 'Noto Sans', 'Roboto', 'Arial', sans-serif;
+	font-size: $m-size;
+}
+
+botton {
+	cursor: pointer;
+
+	&:disabled {
+		cursor: default;
+	}
+}
+
+.isActive {
+	font-weight: bold;
+}
