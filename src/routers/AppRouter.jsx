@@ -1,11 +1,11 @@
 // All roads lead to Rome
 
 import React from 'react';
-import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import ExpenseDashboardPage from '../components/ExpenseDashboardPage.jsx';
+import DashboardPage from '../components/DashboardPage.jsx';
 import EditExpensePage from '../components/EditExpensePage.jsx';
-import AddExpensePage from '../components/AddExpensePage.jsx';
+import GenerateStarPage from '../components/GenerateStarPage.jsx';
 import HelpPage from '../components/HelpPage.jsx';
 import NotFoundPage from '../components/NotFoundPage.jsx';
 import Header from '../components/Header.jsx';
@@ -18,13 +18,13 @@ const AppRouter = () => (
 			<Switch>
 				<Route
 					path='/'
-					component={ ExpenseDashboardPage }
+					component={ DashboardPage }
 					exact={ true }
 				/>
 
 				<Route
-					path='/create'
-					component={ AddExpensePage }
+					path='/generate'
+					component={ GenerateStarPage }
 				/>
 
 				<Route
