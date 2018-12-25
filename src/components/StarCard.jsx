@@ -1,22 +1,25 @@
 import React from 'react'
 
+import Star from '../backend/star.js';
+
+
 class StarCard extends React.Component {
 
 	constructor(props) {
 		super(props);
 
+		this.scale = this.props.scale ? this.props.scale : 3;
+
 		this.state = {
 			mass: '1.000',
-			radius: '1.000',
-			mass: '1.000',
-			radius: '1.000',
-			area: '1.000',
-			volume: '1.000',
-			density: '1.000',
-			luminosity: '1.000',
-			life: '1.000',
-			temperature: '1.000',
-			abs_temperature: '5778'
+			radius: 1.0,
+			area: 1.0,
+			volume: 1.0,
+			density: 1.0,
+			luminosity: 1.0,
+			life: 1.0,
+			temperature: 1.0,
+			abs_temperature: 5778,
 		};
 	}
 
@@ -27,33 +30,13 @@ class StarCard extends React.Component {
 			this.setState(() => ({ mass }), this.recalcData);
 	}
 
-	onRadiusChange = (e) => {
-		const radius = e.target.value;
-
-		if(!radius || radius.match(/^\d+(\.\d{0,3})?$/))
-			this.setState(() => ({ radius }), this.recalcData);
-	}
-
 	recalcData = () => {
-		const mass = parseFloat(this.state.mass);
-		const radius = parseFloat(this.state.radius);
-		if(isNaN(mass) || isNaN(radius))
+		const _mass = parseFloat(this.state.mass);
+		if(isNaN(_mass))
 			return;
-
-		const area = Math.pow(radius, 2).toFixed(3);
-		const volume = Math.pow(radius, 3).toFixed(3);
-		const density = (mass / volume).toFixed(3);
-
-		const luminosity = Math.pow(mass, 3.5).toFixed(3);
-		const life = (mass / luminosity).toFixed(3);
-
-		const temperature = Math.pow(luminosity / area, 0.25 ).toFixed(3);
-		const abs_temperature = (temperature * 5778).toFixed(3);
-
-		this.setState(() => ({
-			area, volume, density, luminosity, life,
-			temperature, abs_temperature
-		}));
+		
+		const { mass, ...p  } = new Star(_mass);
+		this.setState(() => ({ ...p }));
 	}
 
 	render() {
@@ -76,12 +59,7 @@ class StarCard extends React.Component {
 							Radius
 						</td>
 						<td className="starTable__data">
-							<input
-								type="text"
-								autoFocus={ true }
-								value={ this.state.radius }
-								onChange={ this.onRadiusChange }
-							/>
+							{ this.state.radius.toFixed(this.scale) } R☉
 						</td>
 					</tr>
 
@@ -90,13 +68,13 @@ class StarCard extends React.Component {
 							Luminosity
 						</td>
 						<td className="starTable__data">
-							{ this.state.luminosity } L☉
+							{ this.state.luminosity.toFixed(this.scale) } L☉
 						</td>
 						<td className="starTable__desc">
 							Temperature
 						</td>
 						<td className="starTable__data">
-							{ this.state.abs_temperature } K
+							{ this.state.abs_temperature.toFixed(0) } K
 						</td>
 					</tr>
 
@@ -105,13 +83,13 @@ class StarCard extends React.Component {
 							Life Time
 						</td>
 						<td className="starTable__data">
-							{ this.state.life } t☉
+							{ this.state.life.toFixed(this.scale) } t☉
 						</td>
 						<td className="starTable__desc">
 							Density
 						</td>
 						<td className="starTable__data">
-							{ this.state.density } ρ☉
+							{ this.state.density.toFixed(this.scale) } ρ☉
 						</td>
 					</tr>
 				</tbody>
