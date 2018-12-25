@@ -1,26 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import StarCard from './StarCard.jsx';
-import { add_expense } from '../actions/expenses';
+import StarForm from './StarForm.jsx';
+import { addStar } from '../actions/starActions.js';
 
 
-const AddExpensePage = (props) => (
+const GenerateStarPage = (props) => (
 	<div>
 		<h1>Generate Star</h1>
-		<StarCard
-			editable={ true }
-		/>
-		{/*
 		<StarForm
-			onSubmit={ (expense) => {
-				props.dispatch(add_expense(expense));
+			editable={ true }
+			onSubmit={(star) => {
+				props.dispatch(addStar(star));
 				props.history.push('/');
-			} }
+			}}
 		/>
-		*/}
 	</div>
 );
 
 
-export default connect()(AddExpensePage);
+export default connect()(GenerateStarPage);

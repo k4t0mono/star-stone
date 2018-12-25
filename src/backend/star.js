@@ -1,6 +1,5 @@
 class Star {
     constructor(mass) {
-        // this.id = Math.random().toString(36).substr(2, 9);
         this.mass = mass;
 
         if(mass > 1)

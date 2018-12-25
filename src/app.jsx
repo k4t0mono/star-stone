@@ -12,6 +12,8 @@ import ConfigStore from './store/configStore';
 
 const store = ConfigStore();
 
+console.log(store.getState());
+
 const jsx = (
 	<Provider store={ store }>
 		<AppRouter />

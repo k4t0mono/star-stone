@@ -11,17 +11,18 @@ class StarCard extends React.Component {
 		this.scale = this.props.scale ? this.props.scale : 3;
 
 		this.state = {
-			mass: 1.0,
-			radius: 1.0,
-			area: 1.0,
-			volume: 1.0,
-			density: 1.0,
-			luminosity: 1.0,
-			life: 1.0,
-			temperature: 1.0,
-			abs_temperature: 5778,
-			type: 'G',
-			color: 'fff4ea'
+			mass: props.mass ? props.mass : 1.0,
+			radius: props.radius ? props.radius : 1.0,
+			area: props.area ? props.area : 1.0,
+			volume: props.volume ? props.volume : 1.0,
+			density: props.density ? props.density : 1.0,
+			luminosity: props.luminosity ? props.luminosity : 1.0,
+			life: props.life ? props.life : 1.0,
+			temperature: props.temperature ? props.temperature : 1.0,
+			abs_temperature: props.abs_temperature ? props.abs_temperature : 5778,
+			type: props.type ? props.type : 'G',
+			color: props.color ? props.color : 'fff4ea',
+			name: props.name ? props.name : 'New Star',
 		};
 	}
 
@@ -36,7 +37,7 @@ class StarCard extends React.Component {
 		const _mass = parseFloat(this.state.mass);
 		if(isNaN(_mass))
 			return;
-		
+
 		const { mass, ...p  } = genStarFromMass(_mass);
 		this.setState(() => ({ ...p }));
 	}
@@ -56,6 +57,11 @@ class StarCard extends React.Component {
 	onNameChange = (e) => {
 		const name = e.target.value;
 		this.setState(() => ({ name }));
+	}
+
+	onSubmit = (e) => {
+		const star = { ...this.state };
+		this.props.onSubmit(star);
 	}
 
 	render() {
@@ -81,10 +87,10 @@ class StarCard extends React.Component {
 						</td>
 						<td className="starTable__data">
 							{
-								this.props.editable ? 
+								this.props.editable ?
 								inputMass :
-								this.state.mass
-							}	
+								this.state.mass.toFixed(this.scale)
+							} M☉
 						</td>
 						<td className="starTable__desc">
 							Radius
@@ -129,7 +135,11 @@ class StarCard extends React.Component {
 
 		const titleEditable = (
 			<div>
-				<input type="text" onChange={ this.onNameChange } />
+				<input
+					type="text"
+					value={ this.state.name }
+					onChange={ this.onNameChange }
+				/>
 
 				<select onChange={ this.onSelectChange }>
 					<option value="O">O</option>
@@ -176,7 +186,7 @@ class StarCard extends React.Component {
 
 				{
 					this.props.editable &&
-					<button>Save</button>
+					<button onClick={ this.onSubmit }>Save</button>
 				}
 			</div>
 		)
