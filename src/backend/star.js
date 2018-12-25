@@ -22,31 +22,57 @@ class Star {
         this.habtable_inner = Math.sqrt(this.luminosity / 1.1);
         this.habtable_outer = Math.sqrt(this.luminosity / 0.53);
 
-        // this.calc_color();
+        this.calcType();
+        this.calcColor();
+
+        console.log(this.color);
     }
 
-    calc_color() {
-        switch(this.spectral_type) {
+    calcType() {
+        if(this.mass >= 16 && this.mass < 50)
+            this.type = 'O'
+
+        else if(this.mass >= 2.1 && this.mass < 16)
+            this.type = 'B'
+
+        else if(this.mass >= 1.4 && this.mass < 2.1)
+            this.type = 'A'
+
+        else if(this.mass >= 1.04 && this.mass < 1.4)
+            this.type = 'F'
+
+        else if(this.mass >= 0.8 && this.mass < 1.04)
+            this.type = 'G'
+
+        else if(this.mass >= 0.45 && this.mass < 0.8)
+            this.type = 'K'
+
+        else if(this.mass >= 0.08 && this.mass < 0.45)
+            this.type = 'M'
+    }
+
+    calcColor() {
+        switch(this.type) {
             case 'O':
-                this.color = '#9bb0ff'; break;
+                this.color = '9bb0ff'; break;
 
             case 'B':
-                this.color = '#aabfff'; break;
+                this.color = 'aabfff'; break;
 
             case 'A':
-                this.color = '#cad7ff'; break;
+                this.color = 'cad7ff'; break;
 
             case 'F':
-                this.color = '#f8f7ff'; break;
+                this.color = 'f8f7ff'; break;
 
             case 'G':
-                this.color = '#fff4ea'; break;
+                this.color = 'fff4ea'; break;
 
             case 'K':
-                this.color = '#ffd2a1'; break;
+                this.color = 'ffd2a1'; break;
 
             case 'M':
-                this.color = '#ffcc6f'; break;
+                this.color = 'ffcc6f'; break;
         }
     }
 }
