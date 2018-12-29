@@ -20,8 +20,8 @@ class StarCard extends React.Component {
 			life: props.life ? props.life : 1.0,
 			temperature: props.temperature ? props.temperature : 1.0,
 			abs_temperature: props.abs_temperature ? props.abs_temperature : 5778,
-			type: props.type ? props.type : 'G',
-			color: props.color ? props.color : 'fff4ea',
+			type: props.type ? props.type : 'M',
+			color: props.color ? props.color : 'ffcc6f',
 			name: props.name ? props.name : 'New Star',
 			coordsX: props.coordsX ? props.coordsX : 0,
 			coordsY: props.coordsY ? props.coordsY : 0,
@@ -61,7 +61,7 @@ class StarCard extends React.Component {
 		}
 	}
 
-	onSelectChange = (e) => {
+	onTypeChange = (e) => {
 		const type = e.target.value;
 		this.setState(() => ({ type }));
 	}
@@ -174,7 +174,7 @@ class StarCard extends React.Component {
 					onChange={ this.onNameChange }
 				/>
 
-				<select onChange={ this.onSelectChange }>
+				<select onChange={ this.onTypeChange }>
 					<option value="M">M</option>
 					<option value="K">K</option>
 					<option value="G">G</option>
