@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 import { genStarFromMass, genStarFromType } from '../backend/genStar.js';
 
@@ -8,7 +9,8 @@ class StarCard extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.scale = this.props.scale ? this.props.scale : 3;
+		this.scale = props.scale ? props.scale : 3;
+		this.id = props.id;
 
 		this.state = {
 			mass: props.mass ? props.mass : 1.0,
@@ -95,7 +97,6 @@ class StarCard extends React.Component {
 	onSubmit = (e) => {
 		let { mass, ...star } = this.state;
 		mass = parseFloat(mass);
-
 		this.props.onSubmit({ mass, ...star });
 	}
 
@@ -197,7 +198,7 @@ class StarCard extends React.Component {
 
 		const titleNonEditble = (
 			<h3>
-				{ this.state.name }
+				<Link to={`/edit/${this.id}`}>{ this.state.name }</Link>
 				<span>{ this.state.type }</span>
 			</h3>
 		)

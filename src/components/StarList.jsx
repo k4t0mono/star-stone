@@ -12,7 +12,7 @@ const StarList = (props) => (
 
 		{
 			!props.stars.length &&
-			<p>No Stars <Link to={'/generate'}> Go here</Link></p>
+			<p>No Stars <Link to={'/newStar'}> Go here</Link></p>
 		}
 
 		{ props.stars.map((star) => {

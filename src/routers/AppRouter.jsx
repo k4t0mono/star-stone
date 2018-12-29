@@ -4,8 +4,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import DashboardPage from '../components/DashboardPage.jsx';
-import EditExpensePage from '../components/EditExpensePage.jsx';
-import GenerateStarPage from '../components/GenerateStarPage.jsx';
+import EditStarPage from '../components/EditStarPage.jsx';
+import NewStarPage from '../components/NewStarPage.jsx';
 import HelpPage from '../components/HelpPage.jsx';
 import NotFoundPage from '../components/NotFoundPage.jsx';
 import Header from '../components/Header.jsx';
@@ -23,13 +23,13 @@ const AppRouter = () => (
 				/>
 
 				<Route
-					path='/generate'
-					component={ GenerateStarPage }
+					path='/newStar'
+					component={ NewStarPage }
 				/>
 
 				<Route
 					path='/edit/:id'
-					component={ EditExpensePage }
+					component={ EditStarPage }
 				/>
 
 				<Route

@@ -1,5 +1,3 @@
-import { runInThisContext } from "vm";
-
 class Star {
     constructor(mass, x, y, z) {
         this.mass = mass;

@@ -3,15 +3,17 @@ import { connect } from 'react-redux';
 
 import StarForm from './StarForm.jsx';
 import { addStar } from '../actions/starActions.js';
+import { genId } from '../backend/utils.js';
 
 
-const GenerateStarPage = (props) => (
+const NewStarPage = (props) => (
 	<div>
 		<h1>Generate Star</h1>
 		<StarForm
 			editable={ true }
 			onSubmit={(star) => {
-				props.dispatch(addStar(star));
+				const id = genId();
+				props.dispatch(addStar({ id, ...star }));
 				props.history.push('/');
 			}}
 			first={ props.first }
@@ -25,4 +27,4 @@ const mapStateProps = (state) => {
 	}
 }
 
-export default connect(mapStateProps)(GenerateStarPage);
+export default connect(mapStateProps)(NewStarPage);

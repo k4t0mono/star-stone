@@ -6,7 +6,7 @@ const Header = () => (
 		<h1>Star Stone</h1>
 
 		<NavLink to='/' activeClassName='isActive' exact={true}>Dashboard</NavLink>
-		<NavLink to='/generate' activeClassName='isActive'>Generate Star</NavLink>
+		<NavLink to='/newStar' activeClassName='isActive'>New Star</NavLink>
 		<NavLink to='/help' activeClassName='isActive'>Help</NavLink>
 	</header>
 );

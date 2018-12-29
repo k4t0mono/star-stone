@@ -1,11 +1,6 @@
-import { genId } from '../backend/utils.js';
-
 export const addStar = (star) => ({
 	type: 'addStar',
-	star: {
-		id: genId(),
-		...star
-	},
+	star: { ...star },
 });
 
 export const removeStar = ({ id }) => ({
