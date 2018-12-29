@@ -20,8 +20,8 @@ class StarCard extends React.Component {
 			life: props.life ? props.life : 1.0,
 			temperature: props.temperature ? props.temperature : 1.0,
 			abs_temperature: props.abs_temperature ? props.abs_temperature : 5778,
-			type: props.type ? props.type : 'M',
-			color: props.color ? props.color : 'ffcc6f',
+			type: props.type ? props.type : 'G',
+			color: props.color ? props.color : 'fff4ea',
 			name: props.name ? props.name : 'New Star',
 			coordsX: props.coordsX ? props.coordsX : 0,
 			coordsY: props.coordsY ? props.coordsY : 0,
@@ -93,8 +93,10 @@ class StarCard extends React.Component {
 	}
 
 	onSubmit = (e) => {
-		const star = { ...this.state };
-		this.props.onSubmit(star);
+		let { mass, ...star } = this.state;
+		mass = parseFloat(mass);
+
+		this.props.onSubmit({ mass, ...star });
 	}
 
 	render() {
@@ -174,7 +176,10 @@ class StarCard extends React.Component {
 					onChange={ this.onNameChange }
 				/>
 
-				<select onChange={ this.onTypeChange }>
+				<select
+					onChange={ this.onTypeChange }
+					value={ this.state.type }
+				>
 					<option value="M">M</option>
 					<option value="K">K</option>
 					<option value="G">G</option>
@@ -203,7 +208,7 @@ class StarCard extends React.Component {
 					typeof this.state.coordsX === 'string' ?
 					this.state.coordsX :
 					parseFloat(this.state.coordsX).toFixed(3).toString()
-				}	
+				}
 				onChange={ this.onXChange }
 			/>
 		);
@@ -214,7 +219,7 @@ class StarCard extends React.Component {
 					typeof this.state.coordsY === 'string' ?
 					this.state.coordsY :
 					parseFloat(this.state.coordsY).toFixed(3).toString()
-				}	
+				}
 				onChange={ this.onYChange }
 			/>
 		);
@@ -225,7 +230,7 @@ class StarCard extends React.Component {
 					typeof this.state.coordsZ === 'string' ?
 					this.state.coordsZ :
 					parseFloat(this.state.coordsZ).toFixed(3).toString()
-				}	
+				}
 				onChange={ this.onZChange }
 			/>
 		);
@@ -237,7 +242,7 @@ class StarCard extends React.Component {
 						<td>x</td>
 						<td>
 							{
-								this.props.editable ? 
+								this.props.editable ?
 								xInput :
 								this.state.coordsX.toFixed(3)
 							} ly
@@ -246,7 +251,7 @@ class StarCard extends React.Component {
 						<td>y</td>
 						<td>
 							{
-								this.props.editable ? 
+								this.props.editable ?
 								yInput :
 								this.state.coordsY.toFixed(3)
 							} ly
@@ -255,7 +260,7 @@ class StarCard extends React.Component {
 						<td>z</td>
 						<td>
 							{
-								this.props.editable ? 
+								this.props.editable ?
 								zInput :
 								this.state.coordsZ.toFixed(3)
 							} ly
