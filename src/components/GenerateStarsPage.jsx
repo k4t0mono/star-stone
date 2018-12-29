@@ -39,6 +39,8 @@ class GenerateStarsPage extends React.Component {
 		for(let star of stars) {
 			this.props.dispatch(addStar(star));
 		}
+
+		this.props.history.push('/');
 	}
 
 	render() {

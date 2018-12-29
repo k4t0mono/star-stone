@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import StarForm from './StarForm.jsx';
-import { editStar } from '../actions/starActions.js';
+import { editStar, removeStar } from '../actions/starActions.js';
 
 
 const EditStarPage = (props) => {
@@ -19,7 +19,7 @@ const EditStarPage = (props) => {
 			/>
 
 			<button onClick={ () => {
-				props.dispatch(remove_expense({ id: props.expense.id }));
+				props.dispatch(removeStar({ id: props.star.id }));
 				props.history.push('/');
 			} }
 			>

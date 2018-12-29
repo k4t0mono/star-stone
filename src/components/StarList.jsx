@@ -5,6 +5,7 @@ import { saveAs } from 'file-saver';
 
 import StarForm from './StarForm.jsx';
 import getVisibleStars from '../selectors/starSelector.js';
+import { clearStars } from '../actions/starActions.js';
 
 
 class StarList extends React.Component {
@@ -17,14 +18,25 @@ class StarList extends React.Component {
 		saveAs(blob, 'stars.json');
 	}
 
+	clearStars = () => {
+		this.props.dispatch(clearStars());
+	}
+
 	render() {
+		const btns = (
+			<div>
+				<button onClick={ this.clearStars }>Clear</button>
+				<button onClick={ this.exportStars }>Export</button>
+			</div>
+		);
+
 		return (
 			<div>
 				<h2>Star List</h2>
 
 				{
 					this.props.stars.length ?
-					<button onClick={ this.exportStars }>Export</button> :
+					btns :
 					<p>No Stars <Link to={'/newStar'}> Go here</Link></p>
 				}
 

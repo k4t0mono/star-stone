@@ -198,7 +198,13 @@ class StarCard extends React.Component {
 
 		const titleNonEditble = (
 			<h3>
-				<Link to={`/edit/${this.id}`}>{ this.state.name }</Link>
+				<Link to={`/edit/${this.id}`}>
+					{
+						this.state.name === 'New Star' ?
+						this.id :
+						this.state.name
+					}
+				</Link>
 				<span>{ this.state.type }</span>
 			</h3>
 		)
