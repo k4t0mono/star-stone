@@ -2,8 +2,8 @@ import Star from './star.js';
 import { randomRange } from './utils.js';
 
 
-export const genStarFromMass = (mass) => {
-    return new Star(mass);
+export const genStarFromMass = (mass, x, y, z) => {
+    return new Star(mass, x, y, z);
 }
 
 export const genStarFromType = (type) => {
@@ -31,5 +31,8 @@ export const genStarFromType = (type) => {
             mass = randomRange(0.08, 0.45); break;
     }
 
-    return genStarFromMass(mass);
+    const x = randomRange(4, 40);
+    const y = randomRange(4, 40);
+    const z = randomRange(4, 40);
+    return genStarFromMass(mass, x, y, z);
 }

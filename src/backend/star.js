@@ -1,5 +1,7 @@
+import { runInThisContext } from "vm";
+
 class Star {
-    constructor(mass) {
+    constructor(mass, x, y, z) {
         this.mass = mass;
 
         if(mass > 1)
@@ -24,7 +26,10 @@ class Star {
         this.calcType();
         this.calcColor();
 
-        console.log(this.color);
+        this.coordsX = x;
+        this.coordsY = y;
+        this.coordsZ = z;
+        this.distance = Math.sqrt(x*x + y*y + z*z);
     }
 
     calcType() {

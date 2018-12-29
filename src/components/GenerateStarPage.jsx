@@ -14,9 +14,15 @@ const GenerateStarPage = (props) => (
 				props.dispatch(addStar(star));
 				props.history.push('/');
 			}}
+			first={ props.first }
 		/>
 	</div>
 );
 
+const mapStateProps = (state) => {
+	return {
+		first: state.stars.length == 0,
+	}
+}
 
-export default connect()(GenerateStarPage);
+export default connect(mapStateProps)(GenerateStarPage);

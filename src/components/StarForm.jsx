@@ -23,6 +23,9 @@ class StarCard extends React.Component {
 			type: props.type ? props.type : 'G',
 			color: props.color ? props.color : 'fff4ea',
 			name: props.name ? props.name : 'New Star',
+			coordsX: props.coordsX ? props.coordsX : 0,
+			coordsY: props.coordsY ? props.coordsY : 0,
+			coordsZ: props.coordsZ ? props.coordsZ : 0,
 		};
 	}
 
@@ -38,15 +41,24 @@ class StarCard extends React.Component {
 		if(isNaN(_mass))
 			return;
 
-		const { mass, ...p  } = genStarFromMass(_mass);
+		const x = parseFloat(this.state.coordsX);
+		const y = parseFloat(this.state.coordsX);
+		const z = parseFloat(this.state.coordsX);
+
+		const { mass, ...p  } = genStarFromMass(_mass, x, y, z);
 		this.setState(() => ({ ...p }));
 	}
 
 	handleRandom = (e) => {
 		e.preventDefault();
 
-		const star = genStarFromType(this.state.type, this.state.scale);
-		this.setState(() => ({ ...star }));
+		const { coordsX, coordsY, coordsZ, ...star } = genStarFromType(this.state.type);
+
+		if(this.props.first) {
+			this.setState(() => ({ ...star }));
+		} else {
+			this.setState(() => ({ ...star, coordsX, coordsY, coordsZ }));
+		}
 	}
 
 	onSelectChange = (e) => {
@@ -57,6 +69,27 @@ class StarCard extends React.Component {
 	onNameChange = (e) => {
 		const name = e.target.value;
 		this.setState(() => ({ name }));
+	}
+
+	onXChange = (e) => {
+		const coordsX = e.target.value;
+
+		if(!coordsX || coordsX.match(/^\d+(\.\d{0,3})?$/))
+			this.setState(() => ({ coordsX }), this.recalcData);
+	}
+
+	onYChange = (e) => {
+		const coordsY = e.target.value;
+
+		if(!coordsY || coordsY.match(/^\d+(\.\d{0,3})?$/))
+			this.setState(() => ({ coordsY }), this.recalcData);
+	}
+
+	onZChange = (e) => {
+		const coordsZ = e.target.value;
+
+		if(!coordsZ || coordsZ.match(/^\d+(\.\d{0,3})?$/))
+			this.setState(() => ({ coordsZ }), this.recalcData);
 	}
 
 	onSubmit = (e) => {
@@ -142,13 +175,13 @@ class StarCard extends React.Component {
 				/>
 
 				<select onChange={ this.onSelectChange }>
-					<option value="O">O</option>
-					<option value="B">B</option>
-					<option value="A">A</option>
-					<option value="F">F</option>
-					<option value="G">G</option>
-					<option value="K">K</option>
 					<option value="M">M</option>
+					<option value="K">K</option>
+					<option value="G">G</option>
+					<option value="F">F</option>
+					<option value="A">A</option>
+					<option value="B">B</option>
+					<option value="O">O</option>
 				</select>
 
 				<button onClick={ this.handleRandom }>
@@ -164,6 +197,74 @@ class StarCard extends React.Component {
 			</h3>
 		)
 
+		const xInput = (
+			<input
+				value={
+					typeof this.state.coordsX === 'string' ?
+					this.state.coordsX :
+					parseFloat(this.state.coordsX).toFixed(3).toString()
+				}	
+				onChange={ this.onXChange }
+			/>
+		);
+
+		const yInput = (
+			<input
+				value={
+					typeof this.state.coordsY === 'string' ?
+					this.state.coordsY :
+					parseFloat(this.state.coordsY).toFixed(3).toString()
+				}	
+				onChange={ this.onYChange }
+			/>
+		);
+
+		const zInput = (
+			<input
+				value={
+					typeof this.state.coordsZ === 'string' ?
+					this.state.coordsZ :
+					parseFloat(this.state.coordsZ).toFixed(3).toString()
+				}	
+				onChange={ this.onZChange }
+			/>
+		);
+
+		const position = (
+			<table>
+				<tbody>
+					<tr>
+						<td>x</td>
+						<td>
+							{
+								this.props.editable ? 
+								xInput :
+								this.state.coordsX.toFixed(3)
+							} ly
+						</td>
+
+						<td>y</td>
+						<td>
+							{
+								this.props.editable ? 
+								yInput :
+								this.state.coordsY.toFixed(3)
+							} ly
+						</td>
+
+						<td>z</td>
+						<td>
+							{
+								this.props.editable ? 
+								zInput :
+								this.state.coordsZ.toFixed(3)
+							} ly
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		);
+
 		return(
 			<div className="starCard">
 				<section className="starCard__data">
@@ -177,6 +278,7 @@ class StarCard extends React.Component {
 
 					<main>
 						{ TableData }
+						{ !this.props.first && position }
 					</main>
 				</section>
 
