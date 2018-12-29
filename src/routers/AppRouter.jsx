@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import DashboardPage from '../components/DashboardPage.jsx';
 import EditStarPage from '../components/EditStarPage.jsx';
 import NewStarPage from '../components/NewStarPage.jsx';
+import GenerateStarsPage from '../components/GenerateStarsPage.jsx';
 import HelpPage from '../components/HelpPage.jsx';
 import NotFoundPage from '../components/NotFoundPage.jsx';
 import Header from '../components/Header.jsx';
@@ -25,6 +26,11 @@ const AppRouter = () => (
 				<Route
 					path='/newStar'
 					component={ NewStarPage }
+				/>
+
+				<Route
+					path='/generate'
+					component={ GenerateStarsPage }
 				/>
 
 				<Route

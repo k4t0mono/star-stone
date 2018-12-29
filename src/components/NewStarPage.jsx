@@ -8,7 +8,7 @@ import { genId } from '../backend/utils.js';
 
 const NewStarPage = (props) => (
 	<div>
-		<h1>Generate Star</h1>
+		<h2>New Star</h2>
 		<StarForm
 			editable={ true }
 			onSubmit={(star) => {

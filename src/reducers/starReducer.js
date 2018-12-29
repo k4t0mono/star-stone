@@ -18,6 +18,9 @@ const starReducer = (state = [], action) => {
 				return star;
 			});
 
+		case 'clearStars':
+			return [];
+		
 		default:
 			return state;
 	}

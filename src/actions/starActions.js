@@ -13,3 +13,7 @@ export const editStar = (id, updates) => ({
 	id,
 	updates,
 });
+
+export const clearStars = () => ({
+	type: 'clearStars',
+});
