@@ -3,6 +3,7 @@ const defaultState = {
 	type: '',
 	massH: NaN,
 	massL: NaN,
+	asc: false,
 }
 
 const filter_reducer = (state = defaultState, action) => {
@@ -46,6 +47,18 @@ const filter_reducer = (state = defaultState, action) => {
 		return {
 			...state,
 			massH: NaN,
+		}
+
+	case 'setOrderAsc':
+		return {
+			...state,
+			asc: true,
+		}
+	
+	case 'setOrderDes':
+		return {
+			...state,
+			asc: false,
 		}
 
 	default:

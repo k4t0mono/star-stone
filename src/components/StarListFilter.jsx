@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-	setTextFilter, setTypeFilter, setMassRange, clearFilters, clearMassRange
+	setTextFilter, setTypeFilter, setMassRange, clearFilters,
+	clearMassRange, setOrder
 } from '../actions/filtersActions.js';
 
 
@@ -19,6 +20,8 @@ class StarListFilter extends React.Component {
 
 		const reProps = /(\w+)(:([<=>]{1,2})(\d+(\.\d+)?))?/;
 		const reType = /type:([OBAFGKMobafgkm])/;
+		const reOrder = /order:(asc|des)/;
+
 		const searchList = search.split(' ').filter((s) => s != '');
 
 		let matchProps = reProps.exec(searchList[0]);
@@ -32,11 +35,23 @@ class StarListFilter extends React.Component {
 		this.props.dispatch(setTextFilter());
 		for(let i = 0; i < searchList.length; i++) {
 			const matchType = reType.exec(searchList[i]);
-
 			if(matchType) {
 				this.props.dispatch(setTypeFilter(matchType[1]));
 				continue;
+			} else if(searchList[i].match(/type:/)) {
+				this.props.dispatch(setTypeFilter());
+				continue
 			}
+
+			const matchOrder = reOrder.exec(searchList[i]) 
+			if(matchOrder) {
+				this.props.dispatch(setOrder(matchOrder[1].toLowerCase()));
+				continue;
+			} else if(searchList[i].match(/order:/)) {
+				this.props.dispatch(setTypeFilter());
+				continue
+			}
+
 
 			matchProps = reProps.exec(searchList[i]);
 			if(matchProps[4]) {

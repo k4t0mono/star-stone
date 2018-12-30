@@ -22,3 +22,9 @@ export const clearMassRange = (op) => {
 		type: op[0] === 'L' ? 'clearMassLowerEnd' : 'clearMassHigherEnd',
 	}
 }
+
+export const setOrder = (asc = 'asc') => {
+	return {
+		type: asc === 'asc' ? 'setOrderAsc' : 'setOrderDes'
+	}
+}
