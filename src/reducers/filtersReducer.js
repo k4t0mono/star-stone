@@ -1,6 +1,9 @@
 const filter_default_state = {
 	text: 'sun',
 	type: '',
+	mass: {
+		lower: 0,
+	}
 }
 
 const filter_reducer = (state = filter_default_state, action) => {
@@ -17,10 +20,12 @@ const filter_reducer = (state = filter_default_state, action) => {
 			type: action.stype,
 		}
 
-	case 'set_start_date':
+	case 'setMassLowerEnd':
 		return {
 			...state,
-			start_date: action.start_date,
+			mass: {
+				lower: action.amount,
+			}
 		}
 
 	case 'set_end_date':

@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-	setTextFilter, setTypeFilter
+	setTextFilter, setTypeFilter, setMassRange
 } from '../actions/filtersActions.js';
 
 
 class StarListFilter extends React.Component {
 
 	state = {
-		search: "sun"
+		search: "sun mass:>1.1 "
 	}
 
 	searchChange = (e) => {
@@ -21,15 +21,29 @@ class StarListFilter extends React.Component {
 		const reType = /type:([OBAFGKMobafgkm])/;
 		const searchList = search.split(' ').filter((s) => s != '');
 
-		if(!searchList[0] || searchList[0].match(reProps)) {
-			this.props.dispatch(setTextFilter(searchList[0]));
+		let matchProps = reProps.exec(searchList[0]);
+		if(!searchList[0] || matchProps[1] === searchList[0]) {
+			this.props.dispatch(setTextFilter(
+				matchProps[1] === 'undefined' ? '' : matchProps[1]
+			));
+			return;
 		}
-
-		for(let i = 1; i < searchList.length; i++) {
+		console.log(matchProps[1] === searchList[0])
+		this.props.dispatch(setTextFilter());
+		for(let i = 0; i < searchList.length; i++) {
 			const matchType = reType.exec(searchList[i]);
 
 			if(matchType) {
 				this.props.dispatch(setTypeFilter(matchType[1]));
+				continue;
+			}
+
+			matchProps = reProps.exec(searchList[i]);
+			console.log(matchProps);
+			if(matchProps[4]) {
+				const op = matchProps[3];
+				const amount = parseFloat(matchProps[4]);
+				this.props.dispatch(setMassRange({ op, amount }))
 			}
 		}
 	}

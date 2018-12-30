@@ -1,4 +1,4 @@
-const getVisibleStars = (stars, { text, type }) => {
+const getVisibleStars = (stars, { text, type, mass }) => {
 	return stars.filter((star) => {
 		const idMatch = star.id.toLowerCase().includes(text.toLowerCase());
 		const nameMatch = star.name.toLowerCase().includes(text.toLowerCase());
@@ -6,7 +6,9 @@ const getVisibleStars = (stars, { text, type }) => {
 
 		const matchType = star.type.toLowerCase().includes(type.toLowerCase());
 
-		return textMatch && matchType;
+		const matchMassLow = star.mass > mass.lower;
+
+		return textMatch && matchType && matchMassLow;
 	});
 };
 
