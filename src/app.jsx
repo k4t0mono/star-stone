@@ -8,11 +8,16 @@ import 'normalize.css/normalize.css'
 import './styles/styles.scss';
 import AppRouter from './routers/AppRouter.jsx';
 import ConfigStore from './store/configStore';
+import { addStar } from './actions/starActions.js';
+import { genNStars } from './backend/genStar.js'
 
 
 const store = ConfigStore();
 
-console.log(store.getState());
+
+for(let star of genNStars(10)) {
+	store.dispatch(addStar({ name: '', ...star }));
+}
 
 const jsx = (
 	<Provider store={ store }>

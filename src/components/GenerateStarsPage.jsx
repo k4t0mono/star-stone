@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { genStarsFromTypes } from '../backend/genStar.js'
+import { genNStars } from '../backend/genStar.js'
 import { addStar, clearStars } from '../actions/starActions.js';
 
 
@@ -24,18 +24,8 @@ class GenerateStarsPage extends React.Component {
 
 	generateStars = () => {
 		const numberStars = parseInt(this.state.numberStars);
+		const stars = genNStars(numberStars);
 
-		const numberTypes = {
-			'O': Math.ceil(numberStars * 0.00003 / 100),
-			'B': Math.ceil(numberStars * 0.13 / 100),
-			'A': Math.ceil(numberStars * 0.6 / 100),
-			'F': Math.ceil(numberStars * 3 / 100),
-			'G': Math.ceil(numberStars * 7.6 / 100),
-			'K': Math.ceil(numberStars * 12.1 / 100),
-			'M': Math.ceil(numberStars * 76.45 / 100),
-		}
-
-		const stars = genStarsFromTypes(numberTypes);
 		for(let star of stars) {
 			this.props.dispatch(addStar({ name: '', ...star }));
 		}

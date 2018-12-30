@@ -8,6 +8,10 @@ export const setTypeFilter = (stype = '') => ({
 	stype
 })
 
+export const clearFilters = () => ({
+	type: 'clearFilters',
+})
+
 export const setMassRange = ({ op, amount }) => {
 	const type = op[0] === '>' ? 'setMassLowerEnd' : 'setMassHigherEnd';
 

@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-	setTextFilter, setTypeFilter, setMassRange
+	setTextFilter, setTypeFilter, setMassRange, clearFilters
 } from '../actions/filtersActions.js';
 
 
 class StarListFilter extends React.Component {
 
 	state = {
-		search: "sun mass:>1.1 "
+		search: ''
 	}
 
 	searchChange = (e) => {
@@ -48,6 +48,13 @@ class StarListFilter extends React.Component {
 		}
 	}
 
+	handleClear = (e) => {
+		this.setState(
+			() => ({ search: '' }),
+			() => this.props.dispatch(clearFilters())
+		);
+	}
+
 	render() {
 		return (
 			<section>
@@ -56,6 +63,7 @@ class StarListFilter extends React.Component {
 					value={ this.state.search }
 					onChange={ this.searchChange }
 				/>
+				<button onClick={ this.handleClear}>Clear</button>
 			</section>
 		)
 	}

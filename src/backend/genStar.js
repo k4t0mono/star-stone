@@ -2,6 +2,20 @@ import Star from './star.js';
 import { randomRange, genId } from './utils.js';
 
 
+export const genNStars = (numberStars) => {
+	const numberTypes = {
+		'O': Math.ceil(numberStars * 0.00003 / 100),
+		'B': Math.ceil(numberStars * 0.13 / 100),
+		'A': Math.ceil(numberStars * 0.6 / 100),
+		'F': Math.ceil(numberStars * 3 / 100),
+		'G': Math.ceil(numberStars * 7.6 / 100),
+		'K': Math.ceil(numberStars * 12.1 / 100),
+		'M': Math.ceil(numberStars * 76.45 / 100),
+	}
+
+	return genStarsFromTypes(numberTypes);
+}
+
 export const genStarsFromTypes = (numberTypes) => {
 	let stars = [];
 

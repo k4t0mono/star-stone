@@ -1,12 +1,12 @@
-const filter_default_state = {
-	text: 'sun',
+const defaultState = {
+	text: '',
 	type: '',
 	mass: {
 		lower: 0,
 	}
 }
 
-const filter_reducer = (state = filter_default_state, action) => {
+const filter_reducer = (state = defaultState, action) => {
 	switch(action.type) {
 	case 'setTextFilter':
 		return {
@@ -28,10 +28,9 @@ const filter_reducer = (state = filter_default_state, action) => {
 			}
 		}
 
-	case 'set_end_date':
+	case 'clearFilters':
 		return {
-			...state,
-			end_date: action.end_date,
+			...defaultState,
 		}
 
 	default:
