@@ -12,11 +12,13 @@ export const clearFilters = () => ({
 	type: 'clearFilters',
 })
 
-export const setMassRange = ({ op, amount }) => {
-	const type = op[0] === '>' ? 'setMassLowerEnd' : 'setMassHigherEnd';
+export const setMassRange = ({ op, amount }) => ({
+	type: op[0] === '>' ? 'setMassLowerEnd' : 'setMassHigherEnd',
+	amount,
+});
 
+export const clearMassRange = (op) => {
 	return {
-		type,
-		amount,
+		type: op[0] === 'L' ? 'clearMassLowerEnd' : 'clearMassHigherEnd',
 	}
 }

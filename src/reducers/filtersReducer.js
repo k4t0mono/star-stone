@@ -1,9 +1,8 @@
 const defaultState = {
 	text: '',
 	type: '',
-	mass: {
-		lower: 0,
-	}
+	massH: NaN,
+	massL: NaN,
 }
 
 const filter_reducer = (state = defaultState, action) => {
@@ -23,14 +22,30 @@ const filter_reducer = (state = defaultState, action) => {
 	case 'setMassLowerEnd':
 		return {
 			...state,
-			mass: {
-				lower: action.amount,
-			}
+			massL: action.amount,
+		}
+	
+	case 'setMassHigherEnd':
+		return {
+			...state,
+			massH: action.amount
 		}
 
 	case 'clearFilters':
 		return {
 			...defaultState,
+		}
+	
+	case 'clearMassLowerEnd':
+		return {
+			...state,
+			massL: NaN,
+		}
+	
+	case 'clearMassHigherEnd':
+		return {
+			...state,
+			massH: NaN,
 		}
 
 	default:

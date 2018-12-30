@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-	setTextFilter, setTypeFilter, setMassRange, clearFilters
+	setTextFilter, setTypeFilter, setMassRange, clearFilters, clearMassRange
 } from '../actions/filtersActions.js';
 
 
@@ -39,11 +39,16 @@ class StarListFilter extends React.Component {
 			}
 
 			matchProps = reProps.exec(searchList[i]);
-			console.log(matchProps);
 			if(matchProps[4]) {
 				const op = matchProps[3];
 				const amount = parseFloat(matchProps[4]);
 				this.props.dispatch(setMassRange({ op, amount }))
+
+			} else if(searchList[i].match(/mass[:>=]+$/)) {
+				this.props.dispatch(clearMassRange('L'));
+
+			} else if(searchList[i].match(/mass[:<=]+$/)) {
+				this.props.dispatch(clearMassRange('H'));
 			}
 		}
 	}
