@@ -13,7 +13,7 @@ import Header from '../components/Header.jsx';
 
 
 const AppRouter = () => (
-	<BrowserRouter>
+	<BrowserRouter basename={ process.env.PUBLIC_URL }>
 		<div>
 			<Header />
 			<Switch>
