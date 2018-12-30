@@ -1,5 +1,6 @@
 const filter_default_state = {
 	text: 'sun',
+	type: '',
 }
 
 const filter_reducer = (state = filter_default_state, action) => {
@@ -10,10 +11,10 @@ const filter_reducer = (state = filter_default_state, action) => {
 			text: action.text,
 		}
 
-	case 'sort_by_amount':
+	case 'setTypeFilter':
 		return {
 			...state,
-			sort_by: 'amount',
+			type: action.stype,
 		}
 
 	case 'set_start_date':

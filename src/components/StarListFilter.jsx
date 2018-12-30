@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setTextFilter } from '../actions/filtersActions.js';
+import {
+	setTextFilter, setTypeFilter
+} from '../actions/filtersActions.js';
 
 
 class StarListFilter extends React.Component {
@@ -21,6 +23,14 @@ class StarListFilter extends React.Component {
 
 		if(!searchList[0] || searchList[0].match(reProps)) {
 			this.props.dispatch(setTextFilter(searchList[0]));
+		}
+
+		for(let i = 1; i < searchList.length; i++) {
+			const matchType = reType.exec(searchList[i]);
+
+			if(matchType) {
+				this.props.dispatch(setTypeFilter(matchType[1]));
+			}
 		}
 	}
 
