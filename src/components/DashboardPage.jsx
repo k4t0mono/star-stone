@@ -1,12 +1,12 @@
 import React from 'react';
 
-import ExpenseListFilter from './ExpenseListFilter.jsx';
+import StarListFilter from './StarListFilter.jsx';
 import StarList from './StarList.jsx';
 
 
 const ExpenseDashboardPage = () => (
 	<div>
-		{/* <ExpenseListFilter /> */}
+		<StarListFilter />
 		<StarList />
 	</div>
 );

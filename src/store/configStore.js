@@ -1,11 +1,11 @@
 import { createStore, combineReducers } from 'redux';
-import filter_reducer from '../reducers/filters';
+import filterReducer from '../reducers/filtersReducer';
 import starReducer from '../reducers/starReducer';
 
 export default () => {
 	const store = createStore(
 		combineReducers({
-			filter: filter_reducer,
+			filter: filterReducer,
 			stars: starReducer,
 		}),
 		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

@@ -37,7 +37,7 @@ class GenerateStarsPage extends React.Component {
 
 		const stars = genStarsFromTypes(numberTypes);
 		for(let star of stars) {
-			this.props.dispatch(addStar(star));
+			this.props.dispatch(addStar({ name: '', ...star }));
 		}
 
 		this.props.history.push('/');

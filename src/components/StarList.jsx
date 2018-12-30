@@ -25,6 +25,10 @@ class StarList extends React.Component {
 	render() {
 		const btns = (
 			<div>
+				<p>
+					{ this.props.stars.length } of { this.props.total }
+					matches the search
+				</p>
 				<button onClick={ this.clearStars }>Clear</button>
 				<button onClick={ this.exportStars }>Export</button>
 			</div>
@@ -35,7 +39,7 @@ class StarList extends React.Component {
 				<h2>Star List</h2>
 
 				{
-					this.props.stars.length ?
+					this.props.total ?
 					btns :
 					<p>No Stars <Link to={'/newStar'}> Go here</Link></p>
 				}
@@ -50,9 +54,9 @@ class StarList extends React.Component {
 }
 
 const mapStateProps = (state) => {
-	console.log('StarList', state);
 	return {
-		stars: getVisibleStars(state.stars),
+		stars: getVisibleStars(state.stars, state.filter),
+		total: state.stars.length,
 	};
 }
 
