@@ -10,6 +10,7 @@ import GenerateStarsPage from '../components/GenerateStarsPage.jsx';
 import HelpPage from '../components/HelpPage.jsx';
 import NotFoundPage from '../components/NotFoundPage.jsx';
 import Header from '../components/Header.jsx';
+import GenerateMapPage from '../components/GenerateMapPage.jsx';
 
 
 const AppRouter = () => (
@@ -31,6 +32,11 @@ const AppRouter = () => (
 				<Route
 					path='/generate'
 					component={ GenerateStarsPage }
+				/>
+
+				<Route
+					path='/map'
+					component={ GenerateMapPage }
 				/>
 
 				<Route

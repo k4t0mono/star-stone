@@ -44,8 +44,8 @@ class StarCard extends React.Component {
 			return;
 
 		const x = parseFloat(this.state.coordsX);
-		const y = parseFloat(this.state.coordsX);
-		const z = parseFloat(this.state.coordsX);
+		const y = parseFloat(this.state.coordsY);
+		const z = parseFloat(this.state.coordsZ);
 
 		const { mass, ...p  } = genStarFromMass(_mass, x, y, z);
 		this.setState(() => ({ ...p }));

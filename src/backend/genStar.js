@@ -58,8 +58,8 @@ export const genStarFromType = (type) => {
 			mass = randomRange(0.08, 0.45); break;
 	}
 
-	const x = randomRange(4, 40);
-	const y = randomRange(4, 40);
-	const z = randomRange(4, 40);
+	const x = randomRange(-40, 40);
+	const y = randomRange(-40, 40);
+	const z = randomRange(-40, 40);
 	return genStarFromMass(mass, x, y, z);
 }
