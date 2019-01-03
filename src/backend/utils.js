@@ -29,6 +29,13 @@ export const orthographicProjection = ({ inclination, azimuth }, { lon, lat }) =
     return { x, y };
 }
 
+export const equiretangularProjection = ({ inclination, azimuth }) => {
+    const y = inclination * Math.cos(azimuth);
+    const x = azimuth;
+
+    return { x, y };
+}
+
 export const polarToCart = ({ radius, azimuth }) => {
     const x = radius * Math.cos(azimuth);
     const y = radius * Math.sin(azimuth);
