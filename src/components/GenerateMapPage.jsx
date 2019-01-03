@@ -18,33 +18,65 @@ class GenerateMapPage extends React.Component {
         let coordsN = [];
         let coordsS = []
         for(let i = 0; i < props.stars.length; i++) {
+            const star = props.stars[i];
             const pos = {
-                x: props.stars[i].coordsX,
-                y: props.stars[i].coordsY,
-                z: props.stars[i].coordsZ,
+                x: star.coordsX,
+                y: star.coordsY,
+                z: star.coordsZ,
             }
             const sph = cartToSph(pos);
             let cart = orthographicProjection(sph, { lon: 0, lat: Math.PI/2 });
+            const id = star.id;
             if(cart) {
-                coordsN.push(cart);
+                coordsN.push({ ...cart, id });
             } else {
                 cart = orthographicProjection(sph, { lon: 0, lat: -Math.PI/2 });
-                coordsS.push(cart);
+                coordsS.push({ ...cart, id });
             }
         }
         
         this.coordsN = coordsN;
         this.coordsS = coordsS;
+
+        this.state = {
+            size: "400",
+        }
+    }
+
+    onSizeChange = (e) => {
+        const size = e.target.value;
+
+		if(!size || size.match(/^\d+(\.\d{0,3})?$/))
+			this.setState(() => ({ size }));
     }
 
     render() {
+        const size = this.state.size ? parseInt(this.state.size) : 0;
         return (
             <section>
                 <header>GenerateMapPage</header>
 
                 <main>
-                    <Map coords={ this.coordsN } />
-                    <Map coords={ this.coordsS } />
+                    <div>
+                        <label>Size</label>
+                        <input
+                            type="text"
+                            value={ this.state.size }
+                            onChange={ this.onSizeChange }
+                        />
+                    </div>
+
+                    <div>
+                        <Map
+                            size={ size }
+                            coords={ this.coordsN }
+                        />
+
+                        <Map
+                            size={ size }
+                            coords={ this.coordsS }
+                        />
+                    </div>
                 </main>
             </section>
         )
