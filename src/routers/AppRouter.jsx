@@ -1,7 +1,7 @@
 // All roads lead to Rome
 
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import DashboardPage from '../components/DashboardPage.jsx';
 import EditStarPage from '../components/EditStarPage.jsx';
@@ -14,7 +14,7 @@ import GenerateMapPage from '../components/GenerateMapPage.jsx';
 
 
 const AppRouter = () => (
-	<BrowserRouter basename={ process.env.PUBLIC_URL }>
+	<HashRouter basename={ process.env.PUBLIC_URL }>
 		<div>
 			<Header />
 			<Switch>
@@ -54,7 +54,7 @@ const AppRouter = () => (
 				/>
 			</Switch>
 		</div>
-	</BrowserRouter>
+	</HashRouter>
 );
 
 export default AppRouter;
