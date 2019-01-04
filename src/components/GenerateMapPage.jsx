@@ -54,7 +54,9 @@ class GenerateMapPage extends React.Component {
         const size = this.state.size ? parseInt(this.state.size) : 0;
         return (
             <section>
-                <header>GenerateMapPage</header>
+                <header>
+                    <h2>GenerateMapPage</h2>
+                </header>
 
                 <main>
                     <div>
