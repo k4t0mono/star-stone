@@ -24,17 +24,23 @@ module.exports = (env) => {
 				{
 				 test: /\.s?css$/,
 				 use: [
+					 {
+						loader: 'css-hot-loader',
+						options: {
+							sourceMap: true
+						 }
+					 },
 					 MiniCssExtractPlugin.loader,
 					 {
-						 loader: 'css-loader',
-						 options: {
-							 sourceMap: true
+						loader: 'css-loader',
+						options: {
+							sourceMap: true
 						 }
 					 },
 					 {
-						 loader: 'sass-loader',
-						 options: {
-							 sourceMap: true
+						loader: 'sass-loader',
+						options: {
+							sourceMap: true
 						 }
 					 }
 				 ]
