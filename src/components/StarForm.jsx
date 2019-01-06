@@ -54,13 +54,8 @@ class StarCard extends React.Component {
 	handleRandom = (e) => {
 		e.preventDefault();
 
-		const { coordsX, coordsY, coordsZ, ...star } = genStarFromType(this.state.type);
-
-		if(this.props.first) {
-			this.setState(() => ({ ...star }));
-		} else {
-			this.setState(() => ({ ...star, coordsX, coordsY, coordsZ }));
-		}
+		const star = genStarFromType(this.state.type);
+		this.setState(() => ({ ...star }));
 	}
 
 	onTypeChange = (e) => {
@@ -290,7 +285,7 @@ class StarCard extends React.Component {
 
 					<main>
 						{ TableData }
-						{ !this.props.first && position }
+						{ position }
 					</main>
 				</section>
 

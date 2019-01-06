@@ -16,15 +16,9 @@ const NewStarPage = (props) => (
 				props.dispatch(addStar({ id, ...star }));
 				props.history.push('/');
 			}}
-			first={ props.first }
 		/>
 	</div>
 );
 
-const mapStateProps = (state) => {
-	return {
-		first: state.stars.length == 0,
-	}
-}
 
-export default connect(mapStateProps)(NewStarPage);
+export default connect()(NewStarPage);

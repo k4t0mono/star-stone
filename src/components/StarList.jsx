@@ -2,11 +2,9 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { saveAs } from 'file-saver';
 
 import StarForm from './StarForm.jsx';
 import getVisibleStars from '../selectors/starSelector.js';
-import { clearStars } from '../actions/starActions.js';
 
 
 class StarList extends React.Component {
@@ -34,18 +32,6 @@ class StarList extends React.Component {
 		this.setState(() => ({ stars }))
 	}
 
-	exportStars = () => {
-		const blob = new Blob(
-			[JSON.stringify(this.props.stars)],
-			{ type: 'application/json;charset=utf-8' }
-		);
-		saveAs(blob, 'stars.json');
-	}
-
-	clearStars = () => {
-		this.props.dispatch(clearStars());
-	}
-
 	handlePageClick = (args) => {
 		this.setState(() => ({
 			page: args.selected + 1,
@@ -53,15 +39,11 @@ class StarList extends React.Component {
 	}
 
 	render() {
-		const btns = (
-			<div>
-				<p>
-					{ this.props.stars.length } of { this.props.total }
-					matches the search
-				</p>
-				<button onClick={ this.clearStars }>Clear</button>
-				<button onClick={ this.exportStars }>Export</button>
-			</div>
+		const desc = (
+			<p>
+				{ this.props.stars.length } of { this.props.total }
+				&nbsp; matches the search
+			</p>
 		);
 
 		return (
@@ -80,7 +62,7 @@ class StarList extends React.Component {
 
 				{
 					this.props.total ?
-					btns :
+					desc :
 					<p>No Stars <Link to={'/newStar'}> Go here</Link></p>
 				}
 

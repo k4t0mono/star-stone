@@ -11,6 +11,7 @@ import HelpPage from '../components/HelpPage.jsx';
 import NotFoundPage from '../components/NotFoundPage.jsx';
 import Header from '../components/Header.jsx';
 import GenerateMapPage from '../components/GenerateMapPage.jsx';
+import StarListPage from '../components/StarListPage.jsx';
 
 
 const AppRouter = () => (
@@ -22,6 +23,11 @@ const AppRouter = () => (
 					path='/'
 					component={ DashboardPage }
 					exact={ true }
+				/>
+
+				<Route
+					path='/stars'
+					component={ StarListPage }
 				/>
 
 				<Route
