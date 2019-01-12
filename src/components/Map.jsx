@@ -1,42 +1,52 @@
 import React from 'react';
 
 
-class Map extends React.Component {
+const Map = (props) => {
+    const size = props.size / 2;
+    const eqrec = props.type == 1;
+    
+    const borderC = (
+        <circle
+            cx={ size } cy={ size } r={ size }
+            stroke='black' strokeWidth='2' fill='white'
+        />
+    );
 
-    render() {
-        const radius = this.props.size / 2;
+    const borderR = (
+        <rect
+            width={ props.size * 2 }
+            height={ props.size }
+            stroke='black'
+            strokeWidth='2'
+            fill='white'
+        />
+    )
 
-        const border = (
+    let dots = [];
+    props.coords.forEach(star => {
+        dots.push((
             <circle
-                cx={ radius } cy={ radius } r={ radius }
-                stroke='black' strokeWidth='2' fill='white'
+                cx={ star.x * size + size * 2 }
+                cy={ star.y * size + size }
+                r={ size/100 }
+                fill='black'
+                key={ star.id }
             />
-        );
+        ))
+    });
 
-        let dots = [];
-        this.props.coords.forEach(star => {
-            dots.push((
-                <circle
-                    cx={ star.x * radius + radius }
-                    cy={ star.y * radius + radius }
-                    r={ radius/100 }
-                    fill='black'
-                    key={ star.id }
-                />
-            ))
-        });
 
-        return (
-            <svg
-                    height={ this.props.size + 10 }
-                    width={ this.props.size + 10 }
-            >
-                { border }
-                { dots.map((d) => (d)) }
-            </svg>
-        )
-
-    }
+    const width = eqrec ? props.size * 2 + 10 : props.size + 10;
+    return (
+        <svg
+                height={ props.size + 10 }
+                width={ width }
+        >
+            { eqrec ? borderR : borderC }
+            { dots.map((d) => (d)) }
+        </svg>
+    )
 }
+
 
 export default Map;

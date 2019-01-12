@@ -20,6 +20,24 @@ export const stereographicProjectionSph = ({ inclination, azimuth }) => {
     return { radius, azimuth };
 }
 
+export const degreeToRadian = (a) => {
+    return a * Math.PI / 180;
+}
+
+export const orthographicProjection2 = (point, origin) => {
+    const lat0 = degreeToRadian(origin.lat);
+    const lon0 = degreeToRadian(origin.lon);
+    const lat = degreeToRadian(point.latitude);
+    const lon = degreeToRadian(point.longitude);
+
+    const c = Math.sin(lat0) * Math.sin(lat) + Math.cos(lat0) * Math.cos(lat) * Math.cos(lon - lon0);
+    if(c < 0) return;
+
+    const x = Math.cos(lat) * Math.sin(lon - lon0);
+    const y = Math.cos(lat0) * Math.sin(lat) - Math.sin(lat0) * Math.cos(lat) * Math.cos(lon - lon0);
+    return { x, y }
+}
+
 export const orthographicProjection = ({ inclination, azimuth }, { lon, lat }) => {
     const c = Math.sin(lat) * Math.sin(1 - azimuth) + Math.cos(lat) * Math.cos(1 - azimuth) * Math.cos(inclination - lon);
     if(c < 0) return;
